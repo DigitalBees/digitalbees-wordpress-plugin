@@ -27,7 +27,7 @@ if (array_key_exists("settings-updated", $_GET)) {
                         <input name="<? echo DIGITALBEES_PLAYER_WIDTH ?>" type="text" value="<?php echo get_option(DIGITALBEES_PLAYER_WIDTH); ?>" />
                     </td>
                 </tr>
-                <th width="92" scope="row">Playler height *?></th>
+                <th width="92" scope="row">Playler height</th>
                     <td width="406">
                         <input name="<? echo DIGITALBEES_PLAYER_HEIGHT ?>" type="text" value="<?php echo get_option(DIGITALBEES_PLAYER_HEIGHT); ?>" />
                     </td>
@@ -38,7 +38,7 @@ if (array_key_exists("settings-updated", $_GET)) {
                        <input type="submit" class="button-primary" value="Save Changes"/>
                        <input type="hidden" name="action" value="update" />
 
-                       <input type="hidden" name="page_options" value="<?php echo implode(",", array(DIGITALBEES_API_KEY, DIGITALBEES_API_SECRET, DIGITALBEES_VIDEO_WIDTH, DIGITALBEES_VIDEO_HEIGHT))?>"/>
+                       <input type="hidden" name="page_options" value="<?php echo implode(",", array(DIGITALBEES_API_KEY, DIGITALBEES_API_SECRET, DIGITALBEES_PLAYER_WIDTH, DIGITALBEES_PLAYER_HEIGHT))?>"/>
                     </td>
                 </tr>
           </tbody>

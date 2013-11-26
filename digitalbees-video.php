@@ -9,7 +9,7 @@
  *  version: 0.0.1
  */
 
-require_once __DIR__."/src/DigitalBeesWPVideo/Embed.php";
+require_once __DIR__."/vendor/autoload.php";
 
 if ( !function_exists( 'add_action' ) )
     wp_die( 'You are trying to access this file in a manner not allowed.', 'Direct Access Forbidden', array( 'response' => '403' ) );
@@ -74,11 +74,53 @@ function digitalbees_video_menu()
 	add_menu_page( 'Digitalbees Video - Plugin', 'DigitalbeesVideo', 'manage_options', 'my-unique-identifier', 'digitalbees_options' );
 }
 
+/**
+ * Form admin DigitalBees Plugin
+ */
 function digitalbees_options() {
 	authentication();
 	include realpath(dirname(__FILE__)) . "/options/config.php";
 }
 
+/**
+ * Add digitalbees tab into Media
+ */
+function digitalbees_type_tab($tabs) {
+        /* name of custom tab */
+        $new_tab = array('mimeframe' => __('DigitalBees', 'mimetype'));
+        return array_merge($tabs, $new_tab);
+}
+add_filter('media_upload_tabs', 'digitalbees_type_tab');
+
+/**
+ * This is my Digitalbees Tab View
+ */
+function digitalbees_media_tab_page() {
+        wp_enqueue_style('media');
+        include realpath(dirname(__FILE__)) . "/media/digitalbees-tab.php";
+}
+
+function insert_mime_type_iframe() {
+    return wp_iframe( 'digitalbees_media_tab_page');
+}
+
+add_action( 'admin_head', 'admin_iframe_css' );
+function admin_iframe_css() {
+	wp_enqueue_style(
+            'admin_iframe_css',
+            DigitalBeesWpVideo_URL.'assets/css/admin_iframe.css',
+            array(),
+            '',	
+            false
+        );
+	wp_enqueue_script(
+		'freewall',
+		DigitalBeesWpVideo_URL.'assets/js/vendor/freewall.js',
+		array( 'jquery' )
+	);
+}
+
+add_action('media_upload_mimeframe', 'insert_mime_type_iframe');
 add_action('admin_menu', 'digitalbees_video_menu');
 add_action('wp_enqueue_scripts', 'init_digitalbees_jsSDJ');
 add_action('plugins_loaded', 'init_digitalbees_in_page');

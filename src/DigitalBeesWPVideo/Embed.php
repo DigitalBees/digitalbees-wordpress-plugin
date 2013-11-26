@@ -21,8 +21,8 @@ class Embed {
     {
         $idRandom = "dbees-".rand(0, 1000);
         $options['apikey'] = get_option(DIGITALBEES_API_KEY);
-        $options['width'] = get_option(DIGITALBEES_PLAYER_WIDTH);
-        $options['height'] = get_option(DIGITALBEES_PLAYER_HEIGHT);
+        $options['width'] = (isset($atts['width'])) ? $atts['width'] : get_option(DIGITALBEES_PLAYER_WIDTH);
+        $options['height'] = (isset($atts['height'])) ? $atts['height'] : get_option(DIGITALBEES_PLAYER_HEIGHT);
         $options['idEl'] = $idRandom;
         $options['id'] = $atts['id'];
         return "<div id={$idRandom}></div><script>_dbeesWPvideo.init(".json_encode($options).");</script";

@@ -1,0 +1,20 @@
+{
+	"name": "digitalbees/wordpress-plugin",
+	"description": "Manage your video into page and posts",
+	"license": "MIT",
+	"keywords": [
+		"wordpress",
+		"plugin",
+		"digitalbees",
+		"video"
+	],
+	"autoload": {
+		"psr-0": {
+			"DigitalBeesWPVideo" : "src"
+		}
+	},
+	"require": {
+        "php": ">=5.2.1",
+		"digitalbees/sdk-php": "0.0.1"
+    }
+}
