@@ -8,6 +8,9 @@
     }
 
     var dbees = {
+        copyToClipboard: function (text) {
+        window.prompt ("Copy to clipboard: Ctrl+C, Enter", text);
+        },
         renderSidebar: function(obj){
             jQuery('#dbees-s-content').empty();
             jQuery('#dbees-s-content').append("<div id='video-cont'></div>");
@@ -21,8 +24,13 @@
                 "<span class='btitle'>Content Provider: </span>"+obj.contentProvider+"<li>" +
                 "<span class='btitle'>Isrc: </span>"+obj.isrc+"<li>" +
                 "<span class='btitle'>Category: </span>"+obj.category+"<li>" +
-                "<br><p>Copy this code in your page</p><span class='dbees-tag'>[dbees id="+obj.id+"]</span><li>" +
-                "</ul>");
+                "<br><p>Copy this code in your page</p><span data-tag='[dbees id="+obj.id+"]' class='dbees-tag'>[dbees id="+obj.id+"]</span><li>" +
+                "</ul>" +
+                "<a href='#' class='button media-button button-primary button-large media-button-insert copyThisTag'>Copy Tag</a>");
+            jQuery('.copyThisTag').click(function(){
+                dbees.copyToClipboard(jQuery('.dbees-tag').data('tag'));
+                window.parent.jQuery('#__wp-uploader-id-2').hide();
+            });
         },
         clickSingleVideo: function(){
             jQuery('.item').click(function(){
