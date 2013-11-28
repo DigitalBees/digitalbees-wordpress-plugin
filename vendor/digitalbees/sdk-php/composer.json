@@ -1,0 +1,29 @@
+{
+    "name" : "digitalbees/sdk-php",
+    "description": "SDK php for digitalbees api. Integration of Official videos in your site",
+    "homepage": "http://www.digitalbees.it",
+    "version" : "0.0.1",
+    "authors" : [{
+			"name" : "Gianluca Arbezzano",
+			"email" : "gianluca.arbezzano@singring.com",
+			"role" : "Developer"
+		}, {
+			"name" : "Antonio de Patto",
+			"email" : "antonio.depatto@singring.com"
+		}
+	],
+	"require" : {
+		"zendframework/zend-http" : "~2.2"
+	},
+	"require-dev" : {
+		"phpunit/phpunit" : ">=3.7"
+	},
+	"autoload" : {
+		"psr-0": {
+            		"DigitalBeesSDK": "library/"
+        	}
+	},
+	"support" : {
+		"email" : "dev@digitalbees.it"
+	}
+}
