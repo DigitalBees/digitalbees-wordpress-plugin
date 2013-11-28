@@ -6,7 +6,7 @@
  *  Description: Manage DigitalBees videos into Wordpress blog
  *  Author: DigitalBees s.r.l
  *  Author URI: http://www.digitalbees.it
- *  version: 0.0.1
+ *  version: 0.0.2
  */
 
 require_once __DIR__."/vendor/autoload.php";
@@ -50,7 +50,7 @@ function authentication(){
 /**
  * Instantiate the Plugin - called using the plugins_loaded action hook.
  */
-function init_digitalbees_in_page( ) 
+function init_digitalbees_in_page( )
 {
     $init = new \DigitalBeesWPVideo\Embed();
     $init->addShortLink();
@@ -59,7 +59,7 @@ function init_digitalbees_in_page( )
 /**
  * call plugin functions
  */
-function init_digitalbees_jsSDJ( ) 
+function init_digitalbees_jsSDJ( )
 {
     $init = new \DigitalBeesWPVideo\Embed();
     $init->init();
@@ -69,7 +69,7 @@ function init_digitalbees_jsSDJ( )
 /**
  * Add menu into Dashboard
  */
-function digitalbees_video_menu() 
+function digitalbees_video_menu()
 {
 	add_menu_page( 'Digitalbees Video - Plugin', 'DigitalbeesVideo', 'manage_options', 'my-unique-identifier', 'digitalbees_options' );
 }
@@ -110,7 +110,7 @@ function admin_iframe_css() {
             'admin_iframe_css',
             DigitalBeesWpVideo_URL.'assets/css/admin_iframe.css',
             array(),
-            '',	
+            '',
             false
         );
 	wp_enqueue_script(
