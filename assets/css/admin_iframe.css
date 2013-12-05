@@ -83,3 +83,8 @@
     cursor: pointer;
     cursor: hand;
 }
+
+.error > p.title {
+    font-size: 20px;
+    font-weight: bold;
+}
