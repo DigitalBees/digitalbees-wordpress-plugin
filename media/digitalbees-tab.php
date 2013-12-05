@@ -59,26 +59,30 @@
             'sortDirection': 'DESC'
         },
         success: function(videos){
-            jQuery.each(videos['data'], function(index, video){
-                var d1=new Date(video.creationDate);
-                jQuery(".container-items").append("<li class='item' data-id='"+video.id+"'><img src='"+video.stillFrame+"?apikey=<?php echo get_option(DIGITALBEES_API_KEY) ?>'/><p><b>"+video.name+"</b><br>"+d1.toDateString()+"</p></li>");
-            })
-            var wall = new freewall(".container-items");
-            wall.reset({
-                'cellW': 200,
-                'cellH': 200,
-                'onResize': function() {
-                    wall['fitWidth']();
-                },
-                'block': {
-                    flex: 1
-                },
-                'fillGap': false,
+            if(videos['data'].length == 0){
+                jQuery(".container-items").append("<div class='error 404'><p class='title'>Video not Found</p><p class='message'>Oh! Sorry try with another query</div></p>");
+            } else {
+                jQuery.each(videos['data'], function(index, video){
+                    var d1=new Date(video.creationDate);
+                    jQuery(".container-items").append("<li class='item' data-id='"+video.id+"'><img src='"+video.stillFrame+"?apikey=<?php echo get_option(DIGITALBEES_API_KEY) ?>'/><p><b>"+video.name+"</b><br>"+d1.toDateString()+"</p></li>");
+                })
+                var wall = new freewall(".container-items");
+                wall.reset({
+                    'cellW': 200,
+                    'cellH': 200,
+                    'onResize': function() {
+                        wall['fitWidth']();
+                    },
+                    'block': {
+                        flex: 1
+                    },
+                    'fillGap': false,
                     'gutterX' : 20,
                     'gutterY' : 20
-            });
-            wall.fitWidth();
-            dbees.clickSingleVideo();
+                });
+                wall.fitWidth();
+                dbees.clickSingleVideo();
+            }
             jQuery("input[name='search']").focusout(function(){
                 var params = {};
                 var urlRequire = 'http://api.digitalbees.it/search/video';
@@ -106,12 +110,17 @@
                     data: params,
                     success: function(videos){
                         jQuery('.container-items').empty();
-                        jQuery.each(videos['data'], function(index, video){
-                            var d1=new Date(video.creationDate);
-                            jQuery(".container-items").append("<li class='item' data-id='"+video.id+"'><img src='"+video.stillFrame+"?apikey=<?php echo get_option(DIGITALBEES_API_KEY) ?>'/><p><b>"+video.name+"</b><br>"+d1.toDateString()+"</p></li>");
-                            wall.fitWidth();
-                        })
-                        dbees.clickSingleVideo();
+                        if(videos['data'].length == 0){
+                            jQuery(".container-items").append("<div class='error 404'><p class='title'>Video not Found</p><p class='message'>Oh! Sorry try with another query</p></div>");
+                        } else {
+                            jQuery.each(videos['data'], function(index, video){
+                                var d1=new Date(video.creationDate);
+                                jQuery(".container-items").append("<li class='item' data-id='"+video.id+"'><img src='"+video.stillFrame+"?apikey=<?php echo get_option(DIGITALBEES_API_KEY) ?>'/><p><b>"+video.name+"</b><br>"+d1.toDateString()+"</p></li>");
+                                wall.fitWidth();
+
+                            });
+                            dbees.clickSingleVideo();
+                        }
                     },
                     dataType: 'jsonp'
                 });
